@@ -1,12 +1,19 @@
 # Fridump
-Fridump (v0.1) is an open source memory dumping tool, primarily aimed to penetration testers and developers. Fridump is using the Frida framework to dump accessible memory addresses from any platform supported. It can be used from a Windows, Linux or Mac OS X system to dump the memory of an iOS, Android or Windows application.
+Fridump is an open source memory dumping tool, primarily aimed to penetration testers and developers. Fridump is using the Frida framework to dump accessible memory addresses from any platform supported. It can be used from a Windows, Linux or Mac OS X system to dump the memory of an iOS, Android or Windows application.
+
+
+Installation
+---
+
+      pip install git+https://github.com/seird/fridump.git
+
 
 Usage
 ---
 
 How to:
 
-      fridump [-h] [-o dir] [-U] [-v] [-r] [-s] [--max-size bytes] process
+      fridump [-h] [-o dir] [-U] [-H HOST] [-v] [-r] [-s] [--max-size bytes] process
 
 The following are the main flags that can be used with fridump:
 
@@ -15,13 +22,14 @@ The following are the main flags that can be used with fridump:
 
       optional arguments:
       -h, --help          show this help message and exit
-      -o dir, --out dir   provide full output directory path. (def: 'dump')
+      -o dir, --out dir  provide full output directory path. (def: 'dump')
       -D id, --device id  connect to device with the given id
-      -U, --usb           device connected over usb
-      -v, --verbose       verbose
-      -r, --read-only     dump read-only parts of memory. More data, more errors
-      -s, --strings       run strings on all dump files. Saved in output dir.
-      --max-size bytes    maximum size of dump file in bytes (def: 20971520)
+      -U, --usb          device connected over usb
+      -H, --host HOST   connect to remote frida-server on HOST
+      -v, --verbose      verbose
+      -r, --read-only    dump read-only parts of memory. More data, more errors
+      -s, --strings      run strings on all dump files. Saved in output dir.
+      --max-size bytes   maximum size of dump file in bytes (def: 20971520)
 
 To find the name of a local process, you can use:
 
@@ -36,16 +44,10 @@ Examples:
       fridump -U -s com.example.WebApp   -  Dump the memory of an Android device and run strings on all dump files
       fridump -D emulator-5554 com.example.WebApp   -   Dump the memory of a process in an emulated Android device
       fridump -r -o [full_path]  -  Dump the memory of a local application and save it to the specified directory
+      fridump -H 192.168.122.12:8888 <PID | process_name >  -  Dump the memory of a remote application
       
 More examples can be found [here](http://pentestcorner.com/introduction-to-fridump/)
 
-Installation
----
-To install Fridump you just need to clone it from git and run it:
-
-      git clone https://github.com/Nightbringer21/fridump.git
-            
-      python fridump.py -h
             
 Pre-requisites
 ---
